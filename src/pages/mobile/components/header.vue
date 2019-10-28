@@ -1,6 +1,6 @@
 <template>
-	
-	<el-col :span="24">
+
+	<el-col :span="24" class="aimeite_header">
 		<header class="header">
 			<div class="wid">
 				<span class="logo"><img class="logo_img" src="http://www.airmate-china.com/uploadfiles/image/wap_logo.png">
@@ -19,7 +19,7 @@
 					</el-form>
 				</div>
 				<ul class="mbul" v-for="(item,index) in navbarjson" :key="index">
-			
+
 					<li>
 						<router-link to="/"><span>首 页</span><img style="vertical-align: middle;float: right;" src="../../../assets/images/aimeite/arrow_right.png"></router-link>
 					</li>
@@ -56,7 +56,7 @@
 					</li>
 					<li @click="clickz= !clickz"><a><span>新闻资讯</span><img style="vertical-align: middle;float: right;" src="../../../assets/images/aimeite/arrow_right.png"></a>
 						<dl v-show="clickz" >
-			
+
 							<dd v-for="(item,index) in item.nf" :key="index">
 								<router-link to="/">{{item.nfc}}</router-link>
 							</dd>
@@ -72,10 +72,27 @@
 				</ul>
 			</div>
 		</header>
-		
+
+	<el-col :span="24" class="swiperOptionFexid">
+	  <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
+	    <!-- slides -->
+	    <swiper-slide><img src="http://www.airmate-china.com/uploadfiles/image/Hbanner_wap.jpg" width="100%" /></swiper-slide>
+	    <swiper-slide><img src="http://www.airmate-china.com/uploadfiles/2018/10/201810091847174717.jpg" width="100%" /></swiper-slide>
+
+	    <!-- Optional controls -->
+	    <div class="swiper-pagination" slot="pagination"></div>
+
+	  </swiper>
 	</el-col>
+
+  </el-col>
 </template>
 <script>
+  import 'swiper/dist/css/swiper.css';
+  import {
+    swiper,
+    swiperSlide
+  } from 'vue-awesome-swiper';
 	export default {
 		name: 'header',
 		data() {
@@ -96,30 +113,42 @@
 							message: '请输入搜索内容',
 							trigger: 'blur'
 						},
-	
+
 					]
 				},
-				
-			
+ swiperOption: {
+            // 参数选项,显示小点
+            pagination: '.swiper-pagination',
+            //循环
+            loop: true,
+            //每张播放时长3秒，自动播放
+            autoplay: 2000,
+            //滑动速度
+            speed: 1000,
+            // delay:1000
+
+
+          },
+
 				product: [],
 				producttwo: [],
 				navbarjson:[]
-	
+
 			}
 		},
-	
+
 		created() {
-			
+
 			this.buildproduct();
 			this.buildproducttwo();
 			this.buildnavbarjson();
 		},
-	
+
 		methods: {
-			
+
 			buildproduct() {
 				this.axios.get('/api/buildlayoutproduct').then(res => {
-					this.product = res.data.data //请求出来的标签数据			
+					this.product = res.data.data //请求出来的标签数据
 				}).catch(function(error) {
 					console.log(error);
 				})
@@ -127,7 +156,7 @@
 			buildproducttwo() {
 				this.axios.get('/api/buildproducttwo').then(res => {
 					console.log(res)
-					this.producttwo = res.data.data //请求出来的标签数据			
+					this.producttwo = res.data.data //请求出来的标签数据
 				}).catch(function(error) {
 					console.log(error);
 				})
@@ -135,7 +164,7 @@
 			buildnavbarjson() {
 				this.axios.get('/api/buildnavbarjson').then(res => {
 					console.log(res)
-					this.navbarjson = res.data.data //请求出来的标签数据			
+					this.navbarjson = res.data.data //请求出来的标签数据
 				}).catch(function(error) {
 					console.log(error);
 				})
@@ -157,10 +186,10 @@
 					}
 				});
 			},
-	
+
 			clickproduct(index) {
 				this.clickproduct = false;
-				
+
 			},
 			clickfuwu(index) {
 				this.clickfuwu = false;
@@ -181,15 +210,24 @@
 				this.nbnavbar = true
 			},
 			navclose(index) {
-				
+
 				this.nbnavbar = false
 			},
 		},
-		
+ components: {
+
+     
+      swiper,
+      swiperSlide,
+
+    },
 	}
 </script>
 <style lang="scss" scoped>
-	
+	.aimeite_header{
+    position: relative;
+    overflow: hidden;
+  }
 		.header {
 			position: absolute;
 			left: 0;
@@ -198,9 +236,9 @@
 			overflow: hidden;
 			z-index: 100;
 		}
-	
-		
-	
+
+
+
 		.header .wid {
 	    position: relative;
 	}
@@ -209,27 +247,27 @@
 	    margin: 0 auto;
 	    padding: 0 2%;
 	}
-	
+
 		.header .logo {
 	    padding: 8% 0;
 	    display: block;
 	    min-width:96%;
 	}
-	
+
 		.header .logo {
 			display: inline-block;
 			vertical-align: middle;
 		}
-	
+
 		.header .logo .logo_img {
 			float: left;
 		}
-	
+
 		.header .logo .logo_caidan {
 			float: right;
 			width: 40px;
 		}
-	
+
 		.header .mb_navbar {
 			position: fixed;
 			 width: 100%;
@@ -239,7 +277,7 @@
 			z-index: 500;
 			overflow: auto;
 			top: 0;
-	
+
 			.mb_search {
 				width: 320px;
 				position: relative;
@@ -250,30 +288,30 @@
 				height: auto;
 				z-index: 1000;
 				background: #005bac;
-	
+
 				.mbsearchformrul {
 					margin-top: 75px;
 				}
 			}
-	
-	
+
+
 		}
 		@media screen and (min-width: 640px){
 	.header  .mb_navbar{
 	    width: 640px;
 	    left: 50%;
 	    margin-left: -320px;
-	  
+
 	}
 	}
 		.mb_navbar .mb_search .mbsearchformrul {
 			/deep/ .el-input__suffix {
-	
+
 				right: 10px;
-	
+
 			}
 		}
-	
+
 		.mb_navbar .mb_search .mbsearchformrul {
 			/deep/ .el-input__suffix .el-input__suffix-inner {
 				font-size: 28px;
@@ -281,7 +319,7 @@
 				/* float: left; */
 			}
 		}
-	
+
 		.mb_navbar .mb_search .mbsearchformrul {
 			/deep/ .el-input__inner {
 				-webkit-appearance: none;
@@ -303,7 +341,7 @@
 				width: 100%;
 			}
 		}
-	
+
 		.mb_navbar .mbul {
 			position: absolute;
 			right: 0;
@@ -315,9 +353,9 @@
 			z-index: 100;
 			background: #005BAC;
 			padding: 160px 2% 15%;
-	
+
 		}
-	
+
 		.mb_navbar .mbul ol {
 			position: absolute;
 			right: 5%;
@@ -325,11 +363,11 @@
 			width: 34px;
 			height: 34px;
 			z-index: 100;
-	
+
 			border: 2px solid #fff;
 			border-radius: 50%;
 		}
-	
+
 		.mb_navbar .mbul ol span {
 			position: absolute;
 			right: 50%;
@@ -339,15 +377,15 @@
 			z-index: 2;
 			transform: translate(50%, -50%);
 		}
-	
+
 		.mb_navbar .mbul ol span:before {
 			transform: rotate(45deg);
 		}
-	
+
 		.mb_navbar .mbul ol span:after {
 			transform: rotate(-45deg);
 		}
-	
+
 		.mb_navbar .mbul ol span:before,
 		.mb_navbar .mbul ol span:after {
 			top: 8px;
@@ -360,36 +398,36 @@
 			content: '';
 			transition: transform 0.3s;
 		}
-	
+
 		.mb_navbar .mbul li {
 			width: 100%;
 			border-bottom: 1px solid #1c6db5;
 		}
-	
+
 		@media screen and (max-width: 375px) {
 			.mb_navbar .mbul li>a {
 				font-size: 16px;
-			
+
 				padding: 2% 0 2% 25%;
 				color: white;
 				font-size: 14px;
 				text-align: left;
-	
-				
+
+
 			}
 		}
-	
+
 		@media screen and (max-width: 480px) {
 			.mb_navbar .mbul li>a {
 				font-size: 18px;
 				color: white;
 				font-size: 14px;
 				text-align: left;
-	
-				
+
+
 			}
 		}
-	
+
 		.mb_navbar .mbul li>a {
 			display: block;
 			padding: 7% 0 7% 25%;
@@ -400,66 +438,66 @@
 			color: white;
 			font-size: 14px;
 			text-align: left;
-	
-			
-	
+
+
+
 		}
 		.mb_navbar .mbul li:nth-child(2)>a {
 		    background-position: 10% 12%;
 		}
-		
-	
+
+
 		.mb_navbar .mbul li:nth-child(3)>a {
 			background-position: 10% 27.5%;
 		}
-	
+
 		.mb_navbar .mbul li:nth-child(4)>a {
 			background-position: 10% 42.5%;
 		}
-	
+
 		.mb_navbar .mbul li:nth-child(5)>a {
 			background-position: 10% 57.5%;
 		}
-	
+
 		.mb_navbar .mbul li:nth-child(6)>a {
 			background-position: 10% 72.8%;
 		}
-	
+
 		.mb_navbar .mbul li:nth-child(7)>a {
 			background-position: 10% 88%;
 		}
-	
+
 		.mb_navbar .mbul li:nth-child(8)>a {
 			background-position: 10% 103.3%;
 		}
-	
+
 		.mb_navbar .mbul li dl {
 			text-align: left;
 			padding-left: 11%;
 			padding-bottom: 10%;
-	
+
 		}
-	
+
 		.mb_navbar .mbul li dd {
 			padding-left: 32px;
 			position: relative;
 		}
-	
+
 		@media screen and (max-width: 480px) {
 			.mb_navbar .mbul li dd a {
 				font-size: 14px;
 				text-align: left;
-	
+
 			}
 		}
-	
+
 		.mb_navbar .mbul li dd a {
 			font-size: 14px;
 			padding: 5% 0;
 			display: block;
 			text-align: left;
 		}
-	
+
 		.mb_navbar .mbul li dd:after {
 			content: '';
 			width: 17px;
@@ -472,7 +510,7 @@
 		.mb_home ul {
 			margin: 1% 0;
 			overflow: hidden;
-		
+
 			li {
 				float: left;
 				list-style: none;
@@ -482,23 +520,23 @@
 				text-align: center;
 				padding: 5% 0 0;
 				margin-top: -1px;
-		
+
 				figure {
 					width: 80%;
 					margin: 0 auto;
-		
+
 					img {
 						max-width: 50%;
 						max-height: 82px;
 					}
 				}
-		
+
 				p {
 					color: #333333;
 					margin: 12% auto;
 				}
 			}
 		}
-		
-	
+
+
 </style>
