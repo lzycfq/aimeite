@@ -6,40 +6,40 @@
       </el-header>
 
       <el-col :span="24" class="m_nav">
-        <router-link to=""><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn1.png" /><span>电风扇</span></router-link>
-        <router-link to=""><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn2.png" /><span>电暖气</span></router-link>
-        <router-link to=""><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn4.png" /><span>空气净化器</span></router-link>
-        <router-link to=""><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn5.png" /><span>除湿器</span></router-link>
-        <router-link to=""><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn6.png" /><span>加湿器</span></router-link>
-        <router-link to=""><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn3.png" /><span>新风系统</span></router-link>
+        <router-link to="/Product"><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn1.png" /><span>电风扇</span></router-link>
+        <router-link to="/Product"><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn2.png" /><span>电暖气</span></router-link>
+        <router-link to="/Product"><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn4.png" /><span>空气净化器</span></router-link>
+        <router-link to="/Product"><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn5.png" /><span>除湿器</span></router-link>
+        <router-link to="/Product"><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn6.png" /><span>加湿器</span></router-link>
+        <router-link to="/Product"><img src="http://www.airmate-china.com/uploadfiles/image/icon/wap_iocn3.png" /><span>新风系统</span></router-link>
       </el-col>
       <el-col :span="24"><img src="http://www.airmate-china.com/uploadfiles/image/wap_Home_img1.jpg" width="100%"></el-col>
       <el-col :span='24' class="Home Home2">
         <ul class="ul clearfix">
 
           <li>
-            <router-link to="">
+            <router-link to="/Product_list">
               <figure><img src="http://www.airmate-china.com/uploadfiles/2019/07/201907181554515451.jpg"></figure>
               <p class="dot">FB2319DR</p>
             </router-link>
           </li>
 
           <li>
-            <router-link to="">
+            <router-link to="/Product_list">
               <figure><img src="http://www.airmate-china.com/uploadfiles/2019/07/201907181539553955.jpg"></figure>
               <p class="dot">CA23-RD7</p>
             </router-link>
           </li>
 
           <li>
-            <router-link to="">
+            <router-link to="/Product_list">
               <figure><img src="http://www.airmate-china.com/uploadfiles/2019/01/201901101542514251.jpg"></figure>
               <p class="dot">HGY905P</p>
             </router-link>
           </li>
 
           <li>
-            <router-link to="">
+            <router-link to="/Product_list">
               <figure><img src="http://www.airmate-china.com/uploadfiles/2019/01/201901101540354035.jpg"></figure>
               <p class="dot">HGY1009P-W</p>
             </router-link>
@@ -216,7 +216,7 @@
         }
 
         return {
-         
+
         }
       }
     },
